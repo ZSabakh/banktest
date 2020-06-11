@@ -1,0 +1,34 @@
+.Dashboard {
+   width: 100%;
+   height: 100%;
+}
+
+.Dashboard * {
+    width: 150px;
+    height: calc(100vh / 7);
+    background-color: blue;
+    
+}
+
+.SideLogo {
+    margin: 0 0;
+    padding: 0 0;
+    display: block;
+}
+
+.Dashboard ul {
+    text-align: center;
+    list-style: none;
+    margin: 0 0;
+    padding: 0 0;
+}
+
+.Dashboard li {
+    text-align: center;
+    
+}
+
+.Dashboard img {
+    display: block;
+    height: 90%;
+}

@@ -1,0 +1,14 @@
+.Dashboard {
+   
+}
+
+.Dashboard * {
+    width: 150px;
+    height: calc(100vh / 7);
+    background-color: blue;
+    
+}
+
+.SideLogo {
+    padding: ;
+}
