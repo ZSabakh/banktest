@@ -1,0 +1,88 @@
+#menu {
+    z-index: auto;
+    position: fixed;
+    height: 100%;
+    display: block;
+    width: 120px;
+    background-color: rgba(0,0,0,.4);
+}
+
+.main_logo {
+    background: #f03226;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: .5s;
+}
+
+.main_logo {
+	background: #ef3124
+}
+.main_logo img {
+	width: 100%;
+	height: 100%;
+	object-fit: contain;
+}
+
+#menu > div {
+	height: calc(100% / 8);
+}
+
+.menu_item {
+	/*display: block;*/
+    width: 100%;
+    position: relative;
+    height: 60px;
+    border-bottom: 1px solid rgba(255,255,255,.15);
+    /*position: relative;*/
+    transition: .4s;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+}
+
+
+.menu_item a {
+	text-decoration: none;
+    color: rgba(255,255,255,.6);
+}
+
+.menu_item img {
+	width: 30px;
+	height: 30px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.menu_item p {
+  padding: 0;
+  margin: 0;
+}
+
+.menu__item_active {
+	background: #fff;
+    color: #000;
+    height: 100%;
+    padding-top: 27%;
+}
+
+.menu__item_active p {
+	color: #000;
+}
+.menu__item_active img {
+	fill: #000 !important;
+}
+
+.menu__item_active::after {
+    content: " ";
+    position: absolute;
+    top: 0;
+    bottom: -1px;
+    right: -10px;
+    width: 11px;
+    background-color: transparent;
+    background-image: url("https://online.alfabank.by/Content/Sites/Ib2/Alfa/images/menu-active-root.png");
+    background-repeat: no-repeat;
+    background-size: 11px 100%;
+}

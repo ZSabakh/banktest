@@ -1,0 +1,124 @@
+.header-container {
+    display: block;
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 80%;
+    height: 50px;
+    margin: 30px calc((100%-width)/10);
+    background-color: brown;
+    
+}
+
+.paybutton {
+    border: 0px ;
+    -webkit-border-radius: 7;
+    -moz-border-radius: 7;
+    border-radius: 7px;
+    -webkit-box-shadow: 0px 1px 2px #d42020;
+    -moz-box-shadow: 0px 1px 2px #d42020;
+    box-shadow: 0px 1px 2px #d42020;
+    color: #ffffff;
+    font-size: 16px;
+    background: #d42020;
+    padding: 12px 20px;
+    text-decoration: none;
+    position: relative;
+    bottom: 0.25vh;
+  }
+  
+  .paybutton:hover {
+    transition: 0.4s;
+    background: #f52323;
+    text-decoration: none;
+    box-shadow: 0px 1px 10px #d42020;
+  }
+
+@media (min-width: 1210px){
+.header-container {
+    min-height: 140px;
+}
+}
+@media (min-width: 1000px){
+.header-container {
+    min-height: 115px;
+    background-color: rgba(0, 0, 0, 0);
+    border-bottom: none;
+    margin-top: 0;
+}   
+}
+.header-container {
+    width: 100%;
+    min-height: 60px;
+    padding-top: 37px;
+}
+
+.header-container h1,
+.header-container button {
+    margin: 0 4%;
+}
+
+@media (min-width: 1210px){
+.header-container-tools {
+    right: 20px;
+    top: 45px;
+}
+}
+
+@media (min-width: 1000px){
+.header-container-tools {
+    position: absolute;
+    margin-top: 0;
+    right: 0;
+    top: 32px;
+}
+}
+.header-container-tools {
+    margin-top: 37px;
+    margin-right: 5vh;
+    position: fixed;
+    display: flex;
+    z-index: 100;
+    -webkit-transform: translateZ(0);
+    top: 0;
+    right: 20px;
+    background-color: crimson;
+}
+
+.support {
+    display: flex;
+    align-items: center;
+    margin-right: 4vh;
+}
+
+.support img{
+    width: 40px;
+}   
+
+.support p {
+
+}
+
+.user-profile {
+    display: flex;
+    align-items: center;
+}
+
+.user-profile img {
+    width: 60px;
+}
+
+.user-profile ul {
+    list-style: none;
+    margin: 0 0;
+    padding: 0 0;
+}
+
+.profname {
+    color: darkcyan;
+}
+
+.profsubname {
+    border-bottom: 1px dotted rgb(151, 148, 148);
+    line-height: 14px;
+}

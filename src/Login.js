@@ -1,42 +1,41 @@
-import React, {Component} from 'react';
+import React, {useState} from 'react';
 import './Login.css';
 import {PostData} from './services/PostData';
 import {Redirect} from 'react-router-dom';
-import axios from 'axios';
-
-class Login extends Component {
-
-    constructor(props){
-        super(props);
-        this.state = {
-            email:'',
-            password:'',
-            redirect: false
-        }
-        this.login = this.login.bind(this);
-        this.onChange = this.onChange.bind(this);
-    }
 
 
+function Login() {
 
-    onChange(e){
-        this.setState({[e.target.name]: e.target.value})
-        console.log(this.state);
-    }
+    // constructor(props){
+    //     super(props);
+    //     this.state = {
+    //         email:'',
+    //         password:'',
+    //         redirect: false
+    //     }
+    //     this.login = this.login.bind(this);
+    //     this.onChange = this.onChange.bind(this);
+    // }
 
-    login = () => {
-        if(this.state.email && this.state.password){
-            PostData('login', this.state).then ((result) => {
-                let responseJSON = result;
-                if(responseJSON.userData) {
-                    sessionStorage.setItem('userData', responseJSON);
-                        console.log(responseJSON);
-                    this.setState({redirect: true});
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+    const [redirect, setRedirect] = useState(false)
+
+
+
+    const login = () => {
+        if(email && password){
+            PostData('login', {email, password}).then ((result) => {
+                let responseJson = result;
+                if(responseJson.token) {
+                    sessionStorage.setItem('token', responseJson.token);
+                    setRedirect(true)
                 }
                 else {
-                    console.log(this.state)
+                    console.log({email, password})
                     console.log(result)
                     console.log('Login Error')
+
                 }
             })
         }
@@ -61,10 +60,12 @@ class Login extends Component {
 
     // }
 
-    render(){
+        if(redirect){
+            return(<Redirect to={'/dashboard'} />)
+        }
 
-        if(this.state.redirect){
-            return(<Redirect to={'/'} />)
+        if(sessionStorage.getItem('token')){
+            return(<Redirect to={'/dashboard'} />)
         }
 
 
@@ -75,7 +76,7 @@ class Login extends Component {
             </head>
             <body>
             <div className="Head">
-            <div className="Logo"><img src="https://media.glassdoor.com/sqll/635560/alfa-bank-squarelogo-1427264599917.png"/></div>
+            <div className="Logo"><img src="https://media.glassdoor.com/sqll/635560/alfa-bank-squarelogo-1427264599917.png" alt="logo"/></div>
             <ul>
                 <li><u>NU</u>MB1</li>
                 <li><u>NU</u>MB2</li>
@@ -89,14 +90,14 @@ class Login extends Component {
             </nav>
             <div className="Input">
             <p>Name</p>
-                <input type="text" name="email" onChange={this.onChange}></input>
+                <input type="text" name="email" onChange={e => setEmail(e.target.value)}></input>
             <p>Password</p>
-            <input type="password" name="password" onChange={this.onChange}></input>
+            <input type="password" name="password" onChange={e => setPassword(e.target.value)}></input>
             <ul>
                 <li><u>Get email</u></li>
                 <li><u>Recover account</u></li>
             </ul>
-            <button className="myButton" onClick={this.login}>Login</button>
+            <button className="myButton" onClick={login}>Login</button>
             </div>
             </div>
             <div className="Foot">
@@ -114,6 +115,5 @@ class Login extends Component {
             </html>
         )
     }
-}
 
 export default Login

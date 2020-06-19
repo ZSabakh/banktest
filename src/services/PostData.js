@@ -8,7 +8,8 @@ export function PostData(type, userData) {
         method: 'POST',
         headers: new Headers({
             'Accept': 'application/json, text/plain',
-            'Content-Type': 'application/json;charset=UTF-8'
+            'Content-Type': 'application/json;charset=UTF-8',
+            'Authorization' : `Bearer ${sessionStorage.getItem('token')}`
           }),
         body: JSON.stringify(userData)
     })
