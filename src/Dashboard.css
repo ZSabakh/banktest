@@ -116,6 +116,7 @@ body, html {
     border-radius: 6px;
     background-color: rgba(0, 0, 0, 0.507);
     width: 90vh;
+    margin-bottom: 5vh;
     float: left;
     overflow: hidden;
 }
@@ -152,3 +153,36 @@ body, html {
 .Accountinfo i {
     
 }
+
+table {
+    font-family: arial, sans-serif;
+    background-color: rgba(243, 243, 243, 0.945);
+    color: black;
+    width: 100%;
+    border-collapse: collapse;
+    
+  }
+
+table tr td:first-child svg
+{
+    position: relative;
+    left: 1.5vh;
+}
+
+  .tableHead {
+      
+      background-color: rgb(114, 114, 114);
+      color: rgb(233, 233, 233);
+      font-weight: lighter;
+      font-style: italic;
+  }
+  
+  td, th {
+    
+    text-align: left;
+    padding: 8px;
+  }
+  
+  tr:nth-child(even) {
+    background-color: #dddddd;
+  }
