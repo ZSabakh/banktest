@@ -1,188 +1,179 @@
-@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap");
 
-body, html {
-	margin: 0;
-	padding: 0;
-	font-family: 'Bebas Neue', cursive;
+body,
+html {
+  margin: 0;
+  padding: 0;
+  font-family: "Bebas Neue", cursive;
 }
-
 
 #content {
-	width: calc(100% - 120px);
-	float: right;
-	box-sizing: border-box;
-    padding: 15px;
-
+  width: calc(100% - 120px);
+  float: right;
+  box-sizing: border-box;
+  padding: 15px;
 }
 
-.left{
-    float: left;
-    width: 60vh;
-    margin-left: 8vh;
-    margin-top: 2vh;
+.left {
+  float: left;
+  width: 60vh;
+  margin-left: 8vh;
+  margin-top: 2vh;
 }
-.right{
-    float: right;
-    width: 60vh;
-    margin-top: 2vh;
+.right {
+  float: right;
+  width: 60vh;
+  margin-top: 2vh;
 }
 
 .home_dashboard_top {
-	width: 100%;
-	display: flex;
-	flex-direction: row;
-	justify-content: space-between;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
-
 .home_dashboard_top > div:nth-child(2) {
-	/*justify-content: flex-end;*/
-	align-items: flex-end;
+  /*justify-content: flex-end;*/
+  align-items: flex-end;
 }
 
 .home_dashboard_top > div:nth-child(2) img {
   display: block;
-	border-radius: 50%;
-	width: 48px;
-	height: 48px;
-	object-fit: cover;
-	box-shadow: 0px 0px 2px 0px rgba(0,0,0,0.75);
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  object-fit: cover;
+  box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.75);
 }
-
 
 .home_dashboard_top > div:nth-child(1) h1 {
-	padding: 0;
-	margin: 0;
+  padding: 0;
+  margin: 0;
 }
 
-
-
 .CurrencyHolder {
-    position: relative;
-    border-radius: 6px;
-    background-color: rgba(0, 0, 0, 0.507);
-    width: 45vh;
-    overflow: hidden;
-
+  position: relative;
+  border-radius: 6px;
+  background-color: rgba(0, 0, 0, 0.507);
+  width: 45vh;
+  overflow: hidden;
 }
 
 .CurrencyHolderTitle {
-    border-bottom: solid brown 3px;
+  border-bottom: solid brown 3px;
 }
 
 .CurrencyHolderTitle p {
-    margin: 12px 20px;
+  margin: 12px 20px;
 }
 
 .CurrencyHolder ul {
-    display: inline-block;
-    align-items: center;
-    margin: 10px 10px;
+  display: inline-block;
+  align-items: center;
+  margin: 10px 10px;
 }
 
 .CurrencyInfo {
-    display: flex;
-    align-items: center;
-    margin: 0px 15px;
+  display: flex;
+  align-items: center;
+  margin: 0px 15px;
 }
 
 .CurrencyInfo img {
-    width: 32px;
-    height: 22px;
+  width: 32px;
+  height: 22px;
 }
 
 .CurrencyInfo ul {
-    list-style: none;
-    padding: 0 10px;
-    padding-right: 0px;
+  list-style: none;
+  padding: 0 10px;
+  padding-right: 0px;
 }
 
 .CurrencyInfo .currencbuy {
-    position: absolute;
-    left: 25vh;
-    margin-right: 50px;
-    padding-bottom: 20px;
+  position: absolute;
+  left: 25vh;
+  margin-right: 50px;
+  padding-bottom: 20px;
 }
 
 .CurrencyInfo .currencsell {
-    position: absolute;
-    left: 35vh;
-    margin-right: 50px;
-    padding-bottom: 20px;
+  position: absolute;
+  left: 35vh;
+  margin-right: 50px;
+  padding-bottom: 20px;
 }
 
 .AccountHolder {
-    position: relative;
-    border-radius: 6px;
-    background-color: rgba(0, 0, 0, 0.507);
-    width: 90vh;
-    margin-bottom: 5vh;
-    float: left;
-    overflow: hidden;
+  position: relative;
+  border-radius: 6px;
+  background-color: rgba(0, 0, 0, 0.507);
+  width: 90vh;
+  margin-bottom: 5vh;
+  float: left;
+  overflow: hidden;
 }
 
 .AccountInfo {
-    display: flex;
-    align-items: center;
-    background-color: rgba(243, 243, 243, 0.945);
-    color: black;
-    border-bottom: rgb(65, 65, 65) 1px solid;
+  display: flex;
+  align-items: center;
+  background-color: rgba(243, 243, 243, 0.945);
+  color: black;
+  border-bottom: rgb(65, 65, 65) 1px solid;
 }
 
 .AccountInfo:last-child {
-    /* border-bottom-right-radius: 10px; */
-    /* border-bottom-left-radius: 10px; */
-    border: transparent;
+  /* border-bottom-right-radius: 10px; */
+  /* border-bottom-left-radius: 10px; */
+  border: transparent;
 }
 
 .AccountInfo ul {
-    list-style: none;
-    
+  list-style: none;
 }
 
 .AccountInfo li {
-
 }
 
 .AccountInfo p {
-    position: absolute;
-    padding-bottom: 1.7vh;
-    left: 75vh;
+  position: absolute;
+  padding-bottom: 1.7vh;
+  left: 75vh;
 }
 
 .Accountinfo i {
-    
 }
 
 table {
-    font-family: arial, sans-serif;
-    background-color: rgba(243, 243, 243, 0.945);
-    color: black;
-    width: 100%;
-    border-collapse: collapse;
-    
-  }
-
-table tr td:first-child svg
-{
-    position: relative;
-    left: 1.5vh;
+  font-family: arial, sans-serif;
+  background-color: rgba(243, 243, 243, 0.945);
+  color: black;
+  width: 100%;
+  border-collapse: collapse;
 }
 
-  .tableHead {
-      
-      background-color: rgb(114, 114, 114);
-      color: rgb(233, 233, 233);
-      font-weight: lighter;
-      font-style: italic;
-  }
-  
-  td, th {
-    
-    text-align: left;
-    padding: 8px;
-  }
-  
-  tr:nth-child(even) {
-    background-color: #dddddd;
-  }
+table tr td:first-child svg {
+  position: relative;
+  left: 1.5vh;
+}
+
+.tableHead {
+  background-color: rgb(114, 114, 114);
+  color: rgb(233, 233, 233);
+  font-weight: lighter;
+}
+
+td,
+th {
+  text-align: left;
+  padding: 8px;
+}
+
+tr:hover {
+  cursor: pointer;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}

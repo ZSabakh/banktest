@@ -1,73 +1,37 @@
 import React, { useState, useEffect } from "react";
 import "./Dashboard.css";
-import { Redirect } from "react-router-dom";
 import { BrowserRouter as Router } from "react-router-dom";
 import { GetData } from "./services/GetData";
 import SideMenu from "./components/SideMenu/SideMenu";
 import HeaderContainer from "./components/HeaderContainer/HeaderContainer";
 import { withRouter } from "react-router-dom";
+import Modal from "./components/Modal/Modal";
+import { connect } from "react-redux";
+import * as actionCreators from "./store/actions/index";
 
 function Dashboard(props) {
-  const [redirect, setRedirect] = useState(false);
-  const [currencyData, setCurrencyData] = useState([]);
-  const [accountData, setAccountData] = useState([]);
-  const [transactionData, setTransactionData] = useState([]);
-  const [profileData, setProfileData] = useState({});
-  console.log(transactionData);
+  const [modal, setModal] = useState(false);
+  const [selectedTransaction, setSelectedTransaction] = useState(0);
 
   useEffect(() => {
-    GetData("transactions/history").then((result) => {
-      let responseJson = result;
-      if (!responseJson.error) {
-        console.log(responseJson);
-        setTransactionData(responseJson);
-      } else {
-        console.log(result);
-        //Method to log out user in case token is expired/invalid. Not finished yet
-        sessionStorage.removeItem("token");
-        props.history.push("/login");
-        //End yet
-        console.log("Login Error");
-      }
-    });
-
-    GetData("profile").then((result) => {
-      let responseJson = result;
-      if (!responseJson.error) {
-        console.log(responseJson);
-        setProfileData(responseJson);
-      } else {
-        console.log(result);
-        console.log("Login Error");
-      }
-    });
-
-    GetData("rates/CurrencyRates").then((result) => {
-      let responseJson = result;
-      if (!responseJson.error) {
-        console.log(responseJson);
-        setCurrencyData(responseJson);
-      } else {
-        console.log(result);
-        console.log("Login Error");
-      }
-    });
-
-    GetData("accounts").then((result1) => {
-      let responseJson1 = result1;
-      if (!responseJson1.error) {
-        console.log(responseJson1);
-        setAccountData(responseJson1);
-      } else {
-        console.log(result1);
-        setRedirect(true);
-        console.log("Login Error");
-      }
-    });
-    if (!sessionStorage.getItem("token")) {
-      setRedirect(false);
-    }
+    props.GetTransactions();
+    props.GetCurrency();
+    props.GetAccount();
+    props.GetProfile();
   }, []);
+
+  if (!sessionStorage.getItem("token")) {
+    alert("Token error");
+    props.history.push("/login");
+  }
+  GetData("profile").then((result) => {
+    let responseJson = result;
+    if (responseJson.error) {
+      alert("Token invalid/expired");
+      sessionStorage.removeItem("token");
+      props.history.push("/login");
+    }
+  });
 
   //LOGOUT MANAGER ! NOT DONE YET
   // function logout() {
@@ -75,8 +39,15 @@ function Dashboard(props) {
   //     sessionStorage.clear();
   // }
 
+  console.log("CURRENCYDATA-", props.currencyData);
+  console.log("ACCOUNTDATA-", props.accountData);
+  console.log("TRANSACTIONDATA-", props.transactionData);
+  console.log("PROFILEDATA-", props.profileData);
+
   let currencies = null;
-  const cutCur = currencyData.slice(0, 4);
+
+  const cutCur = props.currencyData.slice(1, 5);
+
   currencies = cutCur.map((currenc) => {
     return (
       <div className="CurrencyInfo" key={currenc.currency}>
@@ -90,21 +61,33 @@ function Dashboard(props) {
       </div>
     );
   });
+
   let transactions = null;
-  if (transactionData.data) {
-    const cutCur2 = transactionData.data;
+
+  //METHOD TO CHANGE MODAL DISPLAY STATES !
+  const modalDisplay = (id) => {
+    setSelectedTransaction(id - 1);
+    setModal(true);
+  };
+  const modalHide = () => {
+    setModal(false);
+    setSelectedTransaction(0);
+  };
+  //END OF MODAL DISPLAY STATE CHANGE
+  if (props.transactionData[0]) {
+    const cutCur2 = props.transactionData[0].data;
+
     transactions = cutCur2.map((transac) => {
       // var date = transac.transaction_date.slice(0, -8)
-
       return (
-        <tr onClick={"TO BE UPDATED"}>
+        <tr onClick={() => modalDisplay(transac.id)} key={transac.id}>
           <td>
             <svg
               width="24"
               height="24"
               xmlns="http://www.w3.org/2000/svg"
-              fill-rule="evenodd"
-              clip-rule="evenodd"
+              fillRule="evenodd"
+              clipRule="evenodd"
             >
               <path d="M12 0c6.623 0 12 5.377 12 12s-5.377 12-12 12-12-5.377-12-12 5.377-12 12-12zm0 1c6.071 0 11 4.929 11 11s-4.929 11-11 11-11-4.929-11-11 4.929-11 11-11zm7 7.457l-9.005 9.565-4.995-5.865.761-.649 4.271 5.016 8.24-8.752.728.685z" />
             </svg>
@@ -118,7 +101,7 @@ function Dashboard(props) {
   }
 
   let bdata = null;
-  const cutCur1 = accountData;
+  const cutCur1 = props.accountData;
   bdata = cutCur1.map((bdataa) => {
     return (
       <div className="AccountInfo" key={bdataa.id}>
@@ -133,20 +116,61 @@ function Dashboard(props) {
     );
   });
 
-  if (redirect) {
-    return <Redirect to={"/login"} />;
-  }
-
   return (
     <div className="App">
       <Router>
         <SideMenu />
+        {/* BACKDROP TEST FOR MESSAGE */}
+        {props.transactionData[0] ? (
+          <Modal
+            show={modal}
+            modalClosed={modalHide}
+            title={"Transaction details"}
+          >
+            <p>
+              Transaction date:{" "}
+              <i>
+                {
+                  props.transactionData[0].data[selectedTransaction]
+                    .transaction_date
+                }
+              </i>
+            </p>
+            <p>
+              Client account number:{" "}
+              <i>
+                {
+                  props.transactionData[0].data[selectedTransaction]
+                    .client_account_number
+                }
+              </i>
+            </p>
+            <p>
+              Description:{" "}
+              <i>
+                {
+                  props.transactionData[0].data[selectedTransaction]
+                    .categoryInfo[0].description
+                }
+                /{" "}
+                {props.transactionData[0].data[selectedTransaction].description}
+              </i>
+            </p>
+            <p>
+              Currency:{" "}
+              <i>
+                {props.transactionData[0].data[selectedTransaction].currency}
+              </i>
+            </p>
+          </Modal>
+        ) : null}
 
+        {/* BACKDROP TEST FOR MESSAGE END*/}
         <div id="content">
-          {profileData.user ? (
+          {props.profileData.user ? (
             <HeaderContainer
-              name={profileData.user.name}
-              subName={profileData.user.lastname}
+              name={props.profileData.user.name}
+              subName={props.profileData.user.lastname}
             />
           ) : (
             <HeaderContainer name="Loading" subName="Mr Loading :)" />
@@ -197,29 +221,31 @@ function Dashboard(props) {
 
               <div>
                 <table>
-                  <tr className="tableHead">
-                    <th>Status</th>
-                    <th>Date</th>
-                    <th>Note</th>
-                    <th>Amount</th>
-                  </tr>
-                  <tr>
-                    <td>
-                      <svg
-                        width="24"
-                        height="24"
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill-rule="evenodd"
-                        clip-rule="evenodd"
-                      >
-                        <path d="M12 0c6.623 0 12 5.377 12 12s-5.377 12-12 12-12-5.377-12-12 5.377-12 12-12zm0 1c6.071 0 11 4.929 11 11s-4.929 11-11 11-11-4.929-11-11 4.929-11 11-11zm7 7.457l-9.005 9.565-4.995-5.865.761-.649 4.271 5.016 8.24-8.752.728.685z" />
-                      </svg>
-                    </td>
-                    <td>20 JUL 2020</td>
-                    <td>Wire Transfer Fee / თანხის გადარიცხვის საკომისიო</td>
-                    <td>-5.00$</td>
-                  </tr>
-                  {transactions}
+                  <tbody>
+                    <tr className="tableHead">
+                      <th>Status</th>
+                      <th>Date</th>
+                      <th>Note</th>
+                      <th>Amount</th>
+                    </tr>
+                    <tr>
+                      <td>
+                        <svg
+                          width="24"
+                          height="24"
+                          xmlns="http://www.w3.org/2000/svg"
+                          fillRule="evenodd"
+                          clipRule="evenodd"
+                        >
+                          <path d="M12 0c6.623 0 12 5.377 12 12s-5.377 12-12 12-12-5.377-12-12 5.377-12 12-12zm0 1c6.071 0 11 4.929 11 11s-4.929 11-11 11-11-4.929-11-11 4.929-11 11-11zm7 7.457l-9.005 9.565-4.995-5.865.761-.649 4.271 5.016 8.24-8.752.728.685z" />
+                        </svg>
+                      </td>
+                      <td>20 JUL 2020</td>
+                      <td>Wire Transfer Fee / თანხის გადარიცხვის საკომისიო</td>
+                      <td>-5.00$</td>
+                    </tr>
+                    {transactions}
+                  </tbody>
                 </table>
               </div>
             </div>
@@ -230,4 +256,25 @@ function Dashboard(props) {
   );
 }
 
-export default withRouter(Dashboard);
+const mapStateToProps = (state) => {
+  return {
+    currencyData: state.account.currencyData,
+    accountData: state.account.accountData,
+    transactionData: state.account.transactionData,
+    profileData: state.account.profileData,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    GetCurrency: () => dispatch(actionCreators.get_currency()),
+    GetAccount: () => dispatch(actionCreators.get_account()),
+    GetTransactions: () => dispatch(actionCreators.get_transactions()),
+    GetProfile: () => dispatch(actionCreators.get_profile()),
+  };
+};
+//Was withrouter should return it
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withRouter(Dashboard));

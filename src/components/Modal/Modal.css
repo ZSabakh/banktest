@@ -1,0 +1,49 @@
+.Modal {
+  position: fixed;
+  z-index: 500;
+  color: black;
+  background-color: white;
+  width: 100%;
+  border: 1px solid #ccc;
+  box-shadow: 1px 1px 1px black;
+
+  left: 15%;
+  top: 30%;
+  box-sizing: border-box;
+  transition: all 0.3s ease-out;
+}
+
+.ModalHeader {
+  /* background-color: rgb(177, 177, 177); */
+  height: 50px;
+  width: 100%;
+  margin: 0px 0px;
+  background-color: gainsboro;
+  background-image: url("https://my.libertybank.ge/static/media/popup_pattern.0718db35.svg");
+}
+
+.ModalHeader h2 {
+  margin: 0 0;
+  padding-top: 1vh;
+  padding-left: 3vh;
+}
+
+.ModalHeader img {
+  width: 100%;
+  height: 50px;
+}
+
+.ModalChildren {
+  padding-left: 10px;
+}
+
+.ModalChildren i {
+  color: rgb(199, 38, 38);
+}
+
+@media (min-width: 600px) {
+  .Modal {
+    width: 800px;
+    left: calc(50% - 400px);
+  }
+}
