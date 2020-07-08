@@ -88,3 +88,54 @@ export const get_profile = () => {
   };
   //ASYNCHRONOUS CODE !
 };
+
+export const getAuthorized = () => {
+  sessionStorage.removeItem("token");
+  return {
+    type: actionTypes.GET_AUTHORIZED,
+    authorized: false,
+  };
+};
+
+export const authorize = () => {
+  return {
+    type: actionTypes.AUTHORIZE,
+    authorized: true,
+  };
+};
+
+export const get_authorized = () => {
+  return (dispatch) => {
+    GetData("profile").then((result) => {
+      let responseJson = result;
+      if (responseJson.error) {
+        dispatch(getAuthorized());
+      } else {
+        dispatch(authorize());
+      }
+    });
+  };
+  //ASYNCHRONOUS CODE !
+};
+
+export const getCards = (res) => {
+  return {
+    type: actionTypes.GET_CARDS,
+    cards: res,
+  };
+};
+
+export const get_cards = () => {
+  return (dispatch) => {
+    GetData("cards").then((result) => {
+      let responseJson = result;
+      if (!responseJson.error) {
+        dispatch(getCards(responseJson));
+      } else {
+        console.log(result);
+        console.log("Login Error");
+      }
+    });
+  };
+  //ASYNCHRONOUS CODE !
+};

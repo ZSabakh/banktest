@@ -4,7 +4,9 @@ const initialState = {
   currencyData: [],
   accountData: [],
   transactionData: [],
+  cardsData: [],
   profileData: {},
+  authorized: false,
 };
 
 const reducer = (state = initialState, action) => {
@@ -17,7 +19,7 @@ const reducer = (state = initialState, action) => {
     case actionType.GET_ACCOUNT:
       return {
         ...state,
-        accountData: state.accountData.concat(action.account),
+        accountData: action.account,
       };
     case actionType.GET_TRANSACTION:
       return {
@@ -28,6 +30,21 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         profileData: action.person,
+      };
+    case actionType.GET_AUTHORIZED:
+      return {
+        ...state,
+        authorized: action.authorized,
+      };
+    case actionType.AUTHORIZE:
+      return {
+        ...state,
+        authorized: action.authorized,
+      };
+    case actionType.GET_CARDS:
+      return {
+        ...state,
+        cardsData: action.cards,
       };
     default:
       return state;

@@ -1,30 +1,23 @@
-import React from 'react';
-import Dashboard from './Dashboard';
-import Login from './Login';
-import Mainp from './Main';
+import React from "react";
+import Dashboard from "./pages/Dashboard";
+import Login from "./Login";
+import Mainp from "./Main";
 
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-} from "react-router-dom";
-
+import { Switch, Route } from "react-router-dom";
 
 function App() {
   return (
-<Router>
- <Switch>
-    <Route exact path="/login">
-      <Login />
-    </Route>
-    <Route exact path="/">
-      <Mainp />
-    </Route>
-    <Route exact path="/dashboard">
-      <Dashboard />
-    </Route>
- </Switch>
-</Router>
+    <Switch>
+      <Route exact path="/login">
+        <Login />
+      </Route>
+      <Route exact path="/">
+        <Mainp />
+      </Route>
+      <Route path="/dashboard">
+        <Dashboard />
+      </Route>
+    </Switch>
   );
 }
 

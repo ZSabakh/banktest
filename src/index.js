@@ -4,20 +4,27 @@ import "./index.css";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 import thunk from "redux-thunk";
+import { BrowserRouter as Router } from "react-router-dom";
 import accountReducer from "./store/reducers/account";
-import { createStore, combineReducers, applyMiddleware } from "redux";
+import { createStore, combineReducers, applyMiddleware, compose } from "redux";
 import { Provider } from "react-redux";
 
 const mainReducer = combineReducers({
   account: accountReducer,
 });
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-const store = createStore(mainReducer, applyMiddleware(thunk));
+const store = createStore(
+  mainReducer,
+  composeEnhancers(applyMiddleware(thunk))
+);
 
 ReactDOM.render(
   <Provider store={store}>
     <React.StrictMode>
-      <App />
+      <Router>
+        <App />
+      </Router>
     </React.StrictMode>
   </Provider>,
   document.getElementById("root")

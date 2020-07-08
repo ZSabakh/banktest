@@ -6,7 +6,7 @@ const SideMenu = () => {
   return (
     <div id="menu">
       <div className="main_logo">
-        <NavLink to="/dashboard">
+        <NavLink to="/dashboard/accounts">
           <img
             src="https://online.cloud.com.ge/resources/icons/logo.svg"
             alt="DashboardLogo"
@@ -14,7 +14,7 @@ const SideMenu = () => {
         </NavLink>
       </div>
       <div className="menu_item">
-        <NavLink to="/dashboard" activeClassName="menu__item_active">
+        <NavLink to="/dashboard/accounts" activeClassName="menu__item_active">
           <img
             src="http://online.cloud.com.ge/resources/icons/accounts.svg"
             alt="Dashboard"
@@ -23,7 +23,10 @@ const SideMenu = () => {
         </NavLink>
       </div>
       <div className="menu_item">
-        <NavLink to="/expressions" activeClassName="menu__item_active">
+        <NavLink
+          to="/dashboard/expressions"
+          activeClassName="menu__item_active"
+        >
           <img
             src="http://online.cloud.com.ge/resources/icons/expressions.svg"
             alt="Expressions"
@@ -32,7 +35,10 @@ const SideMenu = () => {
         </NavLink>
       </div>
       <div className="menu_item">
-        <NavLink to="/transactions" activeClassName="menu__item_active">
+        <NavLink
+          to="/dashboard/transactions"
+          activeClassName="menu__item_active"
+        >
           <img
             src="http://online.cloud.com.ge/resources/icons/transactions.svg"
             alt="Transactions"
@@ -41,7 +47,7 @@ const SideMenu = () => {
         </NavLink>
       </div>
       <div className="menu_item">
-        <NavLink to="/cards" activeClassName="menu__item_active">
+        <NavLink to="/dashboard/cards" activeClassName="menu__item_active">
           <img
             src="http://online.cloud.com.ge/resources/icons/cards.svg"
             alt="Cards"
@@ -50,7 +56,7 @@ const SideMenu = () => {
         </NavLink>
       </div>
       <div className="menu_item">
-        <NavLink to="/salary" activeClassName="menu__item_active">
+        <NavLink to="/dashboard/salary" activeClassName="menu__item_active">
           <img
             src="http://online.cloud.com.ge/resources/icons/salary.svg"
             alt="Salary"
@@ -59,7 +65,7 @@ const SideMenu = () => {
         </NavLink>
       </div>
       <div className="menu_item">
-        <NavLink to="/currency" activeClassName="menu__item_active">
+        <NavLink to="/dashboard/currency" activeClassName="menu__item_active">
           <img
             src="http://online.cloud.com.ge/resources/icons/currency.svg"
             alt="Currency"
@@ -68,7 +74,7 @@ const SideMenu = () => {
         </NavLink>
       </div>
       <div className="menu_item">
-        <NavLink to="/settings" activeClassName="menu__item_active">
+        <NavLink to="/dashboard/settings" activeClassName="menu__item_active">
           <img
             src="http://online.cloud.com.ge/resources/icons/settings.svg"
             alt="Settings"
