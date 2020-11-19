@@ -10,7 +10,7 @@ export const getCurrency = (res) => {
 
 export const get_currency = () => {
   return (dispatch) => {
-    GetData("rates/CurrencyRates").then((result) => {
+    GetData("rates/currency-rates").then((result) => {
       let responseJson = result;
       if (!responseJson.error) {
         dispatch(getCurrency(responseJson));
